@@ -11,7 +11,7 @@ EXCESS_CHARS   = [" ", "|"]
 FILE_EXT       = "trinkey"
 JUST_COMMAND   = [":__", "end", "!__"]
 NEWLINE        = "\n"
-VALID_COMMANDS = ["cmd", "add", "sub", "mlt", "div", "str", "cmd", "2st", "2nm", "for", "whl", "?__", "?:_", ":__", "end", "dsp", "in_", "!__"]
+VALID_COMMANDS = ["cmd", "add", "sub", "mlt", "div", "str", "cmd", "2st", "2nm", "2in", "for", "whl", "?__", "?:_", ":__", "end", "dsp", "in_", "!__"]
 
 def removeStrings(string: str) -> str:
     out = ""
@@ -85,15 +85,7 @@ for i in stack:
 
     elif CMD == "add":
         if len(removeStrings(INFO).split(",")) == 3:
-            if len(removeExcessChars(removeStrings(INFO).split(",")[2])) != 2 or \
-                removeExcessChars(INFO.split(",")[-1])[0] != "$" or \
-                removeExcessChars(INFO.split(",")[-1])[1] not in "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789":
-                err = SyntaxError()
-                err.filename = path
-                err.msg = f"Compiling error: Item '{removeExcessChars(removeStrings(INFO)).split(',')[2]}' not register at stack {count} ({CMD}: {INFO})"
-                raise err
-            else:
-                addVal(f"{replaceRegisters(removeExcessChars(INFO.split(',')[-1]))} = {replaceRegisters(removeExcessChars(INFO.split(',')[0]))} + {replaceRegisters(removeExcessChars(INFO.split(',')[-2]))}")
+            addVal(f"{replaceRegisters(removeExcessChars(INFO.split(',')[-1]))} = {replaceRegisters(removeExcessChars(INFO.split(',')[0]))} + {replaceRegisters(removeExcessChars(INFO.split(',')[-2]))}")
         else:
             err = SyntaxError()
             err.filename = path
@@ -102,15 +94,7 @@ for i in stack:
 
     elif CMD == "sub":
         if len(removeStrings(INFO).split(",")) == 3:
-            if len(removeExcessChars(removeStrings(INFO).split(",")[2])) != 2 or \
-                removeExcessChars(INFO.split(",")[-1])[0] != "$" or \
-                removeExcessChars(INFO.split(",")[-1])[1] not in "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789":
-                err = SyntaxError()
-                err.filename = path
-                err.msg = f"Compiling error: Item '{removeExcessChars(removeStrings(INFO)).split(',')[2]}' not register at stack {count} ({CMD}: {INFO})"
-                raise err
-            else:
-                addVal(f"{replaceRegisters(removeExcessChars(INFO.split(',')[-1]))} = {replaceRegisters(removeExcessChars(INFO.split(',')[0]))} - {replaceRegisters(removeExcessChars(INFO.split(',')[-2]))}")
+            addVal(f"{replaceRegisters(removeExcessChars(INFO.split(',')[-1]))} = {replaceRegisters(removeExcessChars(INFO.split(',')[0]))} - {replaceRegisters(removeExcessChars(INFO.split(',')[-2]))}")
         else:
             err = SyntaxError()
             err.filename = path
@@ -119,15 +103,7 @@ for i in stack:
 
     elif CMD == "mlt":
         if len(removeStrings(INFO).split(",")) == 3:
-            if len(removeExcessChars(removeStrings(INFO).split(",")[2])) != 2 or \
-                removeExcessChars(INFO.split(",")[-1])[0] != "$" or \
-                removeExcessChars(INFO.split(",")[-1])[1] not in "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789":
-                err = SyntaxError()
-                err.filename = path
-                err.msg = f"Compiling error: Item '{removeExcessChars(removeStrings(INFO)).split(',')[2]}' not register at stack {count} ({CMD}: {INFO})"
-                raise err
-            else:
-                addVal(f"{replaceRegisters(removeExcessChars(INFO.split(',')[-1]))} = {replaceRegisters(removeExcessChars(INFO.split(',')[0]))} * {replaceRegisters(removeExcessChars(INFO.split(',')[-2]))}")
+            addVal(f"{replaceRegisters(removeExcessChars(INFO.split(',')[-1]))} = {replaceRegisters(removeExcessChars(INFO.split(',')[0]))} * {replaceRegisters(removeExcessChars(INFO.split(',')[-2]))}")
         else:
             err = SyntaxError()
             err.filename = path
@@ -136,15 +112,7 @@ for i in stack:
 
     elif CMD == "div":
         if len(removeStrings(INFO).split(",")) == 3:
-            if len(removeExcessChars(removeStrings(INFO).split(",")[2])) != 2 or \
-                removeExcessChars(INFO.split(",")[-1])[0] != "$" or \
-                removeExcessChars(INFO.split(",")[-1])[1] not in "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789":
-                err = SyntaxError()
-                err.filename = path
-                err.msg = f"Compiling error: Item '{removeExcessChars(removeStrings(INFO)).split(',')[2]}' not register at stack {count} ({CMD}: {INFO})"
-                raise err
-            else:
-                addVal(f"{replaceRegisters(removeExcessChars(INFO.split(',')[-1]))} = {replaceRegisters(removeExcessChars(INFO.split(',')[0]))} / {replaceRegisters(removeExcessChars(INFO.split(',')[-2]))}")
+            addVal(f"{replaceRegisters(removeExcessChars(INFO.split(',')[-1]))} = {replaceRegisters(removeExcessChars(INFO.split(',')[0]))} / {replaceRegisters(removeExcessChars(INFO.split(',')[-2]))}")
         else:
             err = SyntaxError()
             err.filename = path
@@ -153,15 +121,7 @@ for i in stack:
 
     elif CMD == "2st":
         if len(removeStrings(INFO).split(",")) == 2:
-            if len(removeExcessChars(removeStrings(INFO).split(",")[1])) != 2 or \
-                removeExcessChars(INFO.split(",")[-1])[0] != "$" or \
-                removeExcessChars(INFO.split(",")[-1])[1] not in "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789":
-                err = SyntaxError()
-                err.filename = path
-                err.msg = f"Compiling error: Item '{removeExcessChars(removeStrings(INFO)).split(',')[1]}' not register at stack {count} ({CMD}: {INFO})"
-                raise err
-            else:
-                addVal(f"{replaceRegisters(removeExcessChars(INFO.split(',')[-1]))} = str({replaceRegisters(','.join(INFO.split(',')[:-1:]))})")
+            addVal(f"{replaceRegisters(removeExcessChars(INFO.split(',')[-1]))} = str({replaceRegisters(','.join(INFO.split(',')[:-1:]))})")
         else:
             err = SyntaxError()
             err.filename = path
@@ -170,15 +130,16 @@ for i in stack:
 
     elif CMD == "2nm":
         if len(removeStrings(INFO).split(",")) == 2:
-            if len(removeExcessChars(removeStrings(INFO).split(",")[1])) != 2 or \
-                removeExcessChars(INFO.split(",")[-1])[0] != "$" or \
-                removeExcessChars(INFO.split(",")[-1])[1] not in "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789":
-                err = SyntaxError()
-                err.filename = path
-                err.msg = f"Compiling error: Item '{removeExcessChars(removeStrings(INFO)).split(',')[1]}' not register at stack {count} ({CMD}: {INFO})"
-                raise err
-            else:
-                addVal(f"{replaceRegisters(removeExcessChars(INFO.split(',')[-1]))} = float({replaceRegisters(','.join(INFO.split(',')[:-1:]))})")
+            addVal(f"{replaceRegisters(removeExcessChars(INFO.split(',')[-1]))} = float({replaceRegisters(','.join(INFO.split(',')[:-1:]))})")
+        else:
+            err = SyntaxError()
+            err.filename = path
+            err.msg = f"Compiling error: Invalid amount of inputs at stack {count}, {len(removeStrings(INFO).split(','))} given, 2 required ({CMD}: {INFO})"
+            raise err
+
+    elif CMD == "2in":
+        if len(removeStrings(INFO).split(",")) == 2:
+            addVal(f"{replaceRegisters(removeExcessChars(INFO.split(',')[-1]))} = int({replaceRegisters(','.join(INFO.split(',')[:-1:]))})")
         else:
             err = SyntaxError()
             err.filename = path
@@ -187,15 +148,7 @@ for i in stack:
 
     elif CMD == "str":
         if len(removeStrings(INFO).split(",")) == 2:
-            if len(removeExcessChars(removeStrings(INFO).split(",")[1])) != 2 or \
-                removeExcessChars(INFO.split(",")[-1])[0] != "$" or \
-                removeExcessChars(INFO.split(",")[-1])[1] not in "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789":
-                err = SyntaxError()
-                err.filename = path
-                err.msg = f"Compiling error: Item '{removeExcessChars(removeStrings(INFO)).split(',')[1]}' not register at stack {count} ({CMD}: {INFO})"
-                raise err
-            else:
-                addVal(f"{replaceRegisters(removeExcessChars(INFO.split(',')[-1]))} = {replaceRegisters(removeExcessChars(','.join(INFO.split(',')[:-1:])))}")
+            addVal(f"{replaceRegisters(removeExcessChars(INFO.split(',')[-1]))} = {replaceRegisters(removeExcessChars(','.join(INFO.split(',')[:-1:])))}")
         else:
             err = SyntaxError()
             err.filename = path
@@ -204,18 +157,10 @@ for i in stack:
 
     elif CMD == "in_":
         if len(removeStrings(INFO).split(",")) == 2:
-            if len(removeExcessChars(removeStrings(INFO).split(",")[1])) != 2 or \
-                removeExcessChars(INFO.split(",")[-1])[0] != "$" or \
-                removeExcessChars(INFO.split(",")[-1])[1] not in "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789":
-                err = SyntaxError()
-                err.filename = path
-                err.msg = f"Compiling error: Item '{removeExcessChars(removeStrings(INFO)).split(',')[1]}' not register at stack {count} ({CMD}: {INFO})"
-                raise err
+            if removeExcessChars(INFO.split(",")[-1])[1] in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+                addVal(f"{replaceRegisters(removeExcessChars(INFO.split(',')[-1]))} = float(input({replaceRegisters(','.join(INFO.split(',')[:-1:]))}))")
             else:
-                if removeExcessChars(INFO.split(",")[-1])[1] in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
-                    addVal(f"{replaceRegisters(removeExcessChars(INFO.split(',')[-1]))} = float(input({replaceRegisters(','.join(INFO.split(',')[:-1:]))}))")
-                else:
-                    addVal(f"{replaceRegisters(removeExcessChars(INFO.split(',')[-1]))} = input({replaceRegisters(','.join(INFO.split(',')[:-1:]))})")
+                addVal(f"{replaceRegisters(removeExcessChars(INFO.split(',')[-1]))} = input({replaceRegisters(','.join(INFO.split(',')[:-1:]))})")
 
         else:
             err = SyntaxError()
@@ -250,14 +195,7 @@ for i in stack:
         addVal(f"while {replaceRegisters(INFO)}{':' if INFO[-1] != ':' else ''}", indentMod=-1)
 
     elif CMD == "for":
-        if len(removeExcessChars(INFO.split(",")[0])) != 2 or \
-            removeExcessChars(INFO.split(",")[0])[0] != "$" or \
-            removeExcessChars(INFO.split(",")[0])[1] not in "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789":
-            err = SyntaxError()
-            err.filename = path
-            err.msg = f"Compiling error: Item '{removeExcessChars(removeStrings(INFO)).split(',')[0]}' not register at stack {count} ({CMD}: {INFO})"
-            raise err
-        elif len(INFO.split(",")) != 4:
+        if len(INFO.split(",")) != 4:
             err = SyntaxError()
             err.filename = path
             err.msg = f"Compiling error: Invalid amount of inputs at stack {count}, {len(INFO.split(','))} given, 4 required ({CMD}: {INFO})"
@@ -265,7 +203,7 @@ for i in stack:
         else:
             indentLevel += 1
             inIfStatement.append(False)
-            addVal(f"for {replaceRegisters(INFO.split(',')[0])} in range({replaceRegisters(', '.join(INFO.split(',')[1::]))}){':' if INFO[-1] != ':' else ''}", indentMod=-1)
+            addVal(f"for {replaceRegisters(INFO.split(',')[0])} in range({replaceRegisters(', '.join([removeExcessChars(i) for i in INFO.split(',')[1::]])) if replaceRegisters(', '.join([removeExcessChars(i) for i in INFO.split(',')[1::]]))[-1] != ':' else replaceRegisters(', '.join([removeExcessChars(i) for i in INFO.split(',')[1::]]))[:-1:]}):", indentMod=-1)
 
     elif CMD == "end":
         indentLevel -= 1
@@ -283,3 +221,5 @@ except FileExistsError:
     saveFile = open(f"{path}.py", "w")
 saveFile.write(output[:-1:])
 saveFile.close()
+
+print("Success!")
