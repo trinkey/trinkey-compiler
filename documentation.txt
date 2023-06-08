@@ -20,6 +20,7 @@ All commands are as follows:
 | str (store var):      val, rSave            (rSave = val)
 | 2st (to string):      #1, strSave           (strSave = str(#1))
 | 2nm (to number):      str1, rSave           (rSave = float(str1))
+| 2in (to integer):     str1, rSave           (rSave = int(str1))
 | ?__ (if):             condition             (if condition != 0 then exec following code)
 | ?:_ (else if)         condition             (if condition != 0 then exec following code, must be after if statement)
 | :__ (else):           {none}                (can follow an if statement, if not the if then xyz)
