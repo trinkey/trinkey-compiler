@@ -1,0 +1,46 @@
+DOCUMENTATION!
+Basics
+| Each line of code has the command, the colon, and the information.
+| Format: 'cmd:info'
+| The command is the instruction to carry out. It shouldn't be more than 3 letters.
+| The colon is the separator. There may be a space after it.
+| The info is any inputs needed for the command. (see table below)
+| It may help to use pipes (|) to show indentation. They are ignored everywhere except in strings and commands.
+| Strings can use single or double quotes interchangeably, however not in the same string. Ex. "Test' and 'Test" wouldn't work however 'Test' and "Test" would
+| You can also use a backslash to 'escape' a character. \n will be a newline, \t will be tab, and you can use \' and \" to type those in strings of the same type.
+| All number values default to 0.0 and string values default to "".
+| In error messages that reference stack, the stack is the number of actual commands from the top until you get to the erroring out item. This ignores blank lines and comments.
+
+All commands are as follows:
+| cmd (command)         inputs                explanation of inputs and basic function
+| add (addition):       #1, #2, rSave         (rSave = #1+#2)
+| sub (subtract):       #1, #2, rSave         (rSave = #1-#2)
+| mlt (multiply):       #1, #2, rSave         (rSave = #1*#2)
+| div (division):       #1, #2, rSave         (rSave = #1/#2)
+| str (store var):      val, rSave            (rSave = val)
+| 2st (to string):      #1, strSave           (strSave = str(#1))
+| 2nm (to number):      str1, rSave           (rSave = float(str1))
+| ?__ (if):             condition             (if condition != 0 then exec following code)
+| ?:_ (else if)         condition             (if condition != 0 then exec following code, must be after if statement)
+| :__ (else):           {none}                (can follow an if statement, if not the if then xyz)
+| whl (while loop):     condition             (while condition is true, it executes code)
+| for (for loop):       rInc, start, end, inc (variable rInc increments by inc, start and end are numbers or num registers, start is inclusive and end is exclusive)
+| end (end):            {none}                (this ends any if/elif/else statements. It only needs to be at the end of a chain. You may put as many of the hyphen character (-) after it for easy code reading. 4 is recommended.)
+| dsp (display):        string                (displays a string to the output terminal. If an integer or float is entered then it will turn it into a string)
+| in_ (input):          string, rSave         (asks user for input. String is the input field, rSave is the save register)
+| !__ (comment):        {none}                (anything after this is a comment and ignored by the compiler, can also be done with a line that doesn't have a colon as the fourth character)
+
+Register info:
+| You have 26 registers for floats, they can be accessed by using $A-Z.
+| You have 10 registers for strings, they can be accessed by using $0-9.
+
+Formatting basics:
+| The command should be three characters, followed by a colon and space, and then any inputs separated by a comma and space.
+| Ex: 'str: "Hello " + "World", $1' would save "Hello World" to register string 1.
+| With loops and conditionals, put a colon at the end of the line. It isn't required however helps with readability.
+| When using pipe characters for indentation, put a single pipe per indentation level and a space after the pipe, not before it.
+| Also do not put a space before the dashes in an end tag.
+| Ex:
+| ?__: 1:
+| dsp:| "Hi!"
+| end:----
